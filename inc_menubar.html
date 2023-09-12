@@ -1,0 +1,19 @@
+<div id="menucontainer" class="w3-bar w3-black" appml-controller="myController">
+    <button class="w3-bar-item w3-button" id="btnLogon" onclick="btnLogonClick();">Login</button><span id="username" class="w3-bar-item"></span>
+    <button class="w3-button w3-black"><a href="customers.html">Customers</a></button>
+    <button class="w3-button w3-black"><a href="products.html">Products</a></button>
+    <button class="w3-button w3-black"><a href="suppliers.html">Suppliers</a></button>    
+     <form class="w3-container" id="frmLogon" style="display:none">
+    <p>
+        <input class="w3-input" type="text" id="email">
+        <label>Email</label>
+    </p>  
+    <p>
+        <input class="w3-input" type="password" id="password">
+        <label>Password</label>
+    </p>
+    <p>
+        <button type="button" class="w3-btn w3-padding w3-teal" style="width:120px" onclick="login()">Submit &nbsp; ></button>
+    </p>
+</form>  
+</div>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="https://www.w3schools.com/appml/2.0.3/appml.js"></script>
+<body>
+
+<div class="w3-container">
+<div class="w3-bar w3-black">
+  <button class="w3-bar-item w3-button" id="btnLogon" onclick="btnLogonClick();">Login</button><span id="username"></span>
+</div>
+<form class="w3-container" id="frmLogon" style="display:none">
+    <p>
+        <input class="w3-input" type="text" id="email">
+        <label>Email</label>
+    </p>  
+    <p>
+        <input class="w3-input" type="password" id="password">
+        <label>Password</label>
+    </p>
+    <p>
+        <button type="button" class="w3-btn w3-padding w3-teal" style="width:120px" onclick="login()">Submit &nbsp; ></button>
+</form>
+
+<div id="Form01" class="w3-container w3-light-grey w3-padding-large w3-margin-bottom" appml-data="appml.php?model=model_customersform" appml-controller="myFormController" style="display:none;">
+
+<div appml-include-html="inc_formcommands.html"></div>
+
+<p>
+<label for="customername">Customer:</label>
+<input id="customername" class="w3-input w3-border">
+</p>
+
+<p>
+<label for="address">Address:</label>
+<input id="address" class="w3-input w3-border">
+</p>
+
+<p>
+<label for="city">City:</label>
+<input id="city" class="w3-input w3-border">
+</p>
+
+<p>
+<label for="postalcode">Postal Code:</label>
+<input id="postalcode" class="w3-input w3-border">
+</p>
+
+<p>
+<label for="country">Country:</label>
+<input id="country" class="w3-input w3-border">
+</p>
+</div>
+
+<div appml-data="appml.php?model=model_customerslist">
+<h1>Customers MySQL</h1>
+<div appml-include-html="inc_listcommands.html"></div>
+<div appml-include-html="inc_filter.html"></div>
+<table class="w3-table-all">
+<tr>
+  <th></th>
+  <th>Customer</th>
+  <th>City</th>
+  <th>Country</th>
+</tr>
+<tr appml-repeat="records">
+  <td style="cursor:pointer;width:34px;"
+  onclick="appml('Form01').run({{CustomerID}})">&#9998;</td>
+  <td>{{CustomerName}}</td>
+  <td>{{City}}</td>
+  <td>{{Country}}</td>
+</tr>
+</table>
+</div> 
+
+</div>
+
+
+<script>
+
+function myFormController($appml) {
+    if ($appml.message == "ready") {return -1;}
+    if ($appml.message == "loaded") {
+        document.getElementById("Form01").style.display="";
+    }
+}
+
+function btnLogonClick() {
+    var button = document.getElementById("btnLogon");
+    if(button.innerHTML == "Login") {
+        document.getElementById("frmLogon").style.display="block";
+    } else {
+        logout();
+    }
+}
+
+function login()
+{
+    var txtEmail = document.getElementById("email").value;
+    var txtPassword = document.getElementById("password").value;
+    var appml = new AppML()
+
+    var objLogin = {login : {f1 : txtEmail, f2 : txtPassword}};
+    var txtResponse = appml.xmlHttp("./appml.php", JSON.stringify(objLogin), "POST", false);
+    var response = JSON.parse(txtResponse.response);
+    if(response.loginmessage) {
+        console.log(response.loginmessage);
+        location.reload();
+    } else {
+        console.log(response.error);
+    }    
+}
+
+function logout()
+{
+    var appml = new AppML()
+    var objLogout = {login : {f1 : "", f2 : ""}};
+    var txtResponse = appml.xmlHttp("./appml.php", JSON.stringify(objLogout), "POST", false);
+    console.log(txtResponse);
+    location.reload();
+}
+
+function getCurrentUser(email)
+{
+    var appml = new AppML();
+    var objGetUserInfo =         
+    {
+        action: "GET", 
+        applmid : "", 
+        displayType: "list", 
+        filters: {
+            queryFields: ["Email"],
+            queryOperators: [0],
+            queryValues: [[email]]
+        },
+        fromrec : 1,
+        rowsperpage: 10,
+        totalRecCounter: 0
+    };
+    const txtResponse = appml.xmlHttp("./appml.php?model=model_userinfo", JSON.stringify(objGetUserInfo), "POST", false);
+    const response = JSON.parse(txtResponse.response);
+    if(response.records) document.getElementById("username").innerHTML = response.records[0].Name;
+}
+
+window.onload = (event) =>{  
+    var appml = new AppML();
+  
+    const objGetUser = {login : {f1 : "appmluser", f2 : ""}};
+    const txtResponse = appml.xmlHttp("./appml.php", JSON.stringify(objGetUser), "POST", false);
+    const response = JSON.parse(txtResponse.response);
+    if(response.appmluser) {
+        document.getElementById("btnLogon").innerHTML = "Logout";
+        getCurrentUser(response.appmluser);
+    }
+}
+</script>
+
+</body>
+</html>
