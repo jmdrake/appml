@@ -1,0 +1,23 @@
+AppML LogSecurity SQL error : SELECT AppmlRoles.Name FROM AppmlRoles LEFT JOIN AppmlUserRoles ON AppmlRoles.RoleID = AppmlUserRoles.RoleID LEFT JOIN AppmlUsers ON AppmlUserRoles.UserID = AppmlUsers.UserID WHERE AppmlUsers.Email = @0 AND AppmlUsers.Pass = @1
+Username : jmdrake_98@yahoo.com
+Password : afasfds
+Security error : admin
+CC : 
+Security error : admin
+CC : 
+Security error : admin
+CC : 
+Request Text : {"action":"UPDATE","appmlid":"1","record":{"items":["customername","address","postalcode","city","country"],"values":["Alfreds Futterkiste","Obere Str. 58","12209","Berlin","Germany"],"types":[]}}
+User : johndoe@email.com
+Security error : user
+CC : 
+Security error : user
+CC : 
+Security error : admin
+CC : 
+Security error : admin
+CC : 
+Security error : admin
+CC : 
+Security error : admin
+CC : 

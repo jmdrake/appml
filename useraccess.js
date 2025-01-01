@@ -1,3 +1,4 @@
+
 function btnLogonClick() {
     var button = document.getElementById("btnLogon");
     if(button.innerHTML == "Login") {

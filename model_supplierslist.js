@@ -1,6 +1,6 @@
 {
 "database" : {
-"connection" : "localmysql",
+"connection" : "inventory",
 "sql" : "SELECT * FROM Suppliers",
 "orderby" : "SupplierName"
 },

@@ -5,6 +5,7 @@
       <title>Suppliers</title>
       <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
       <script src="https://www.w3schools.com/appml/2.0.3/appml.js"></script>
+    <script src="useraccess.js"></script>
     </head>
     <body>
       <div appml-include-html="inc_menubar.html"></div>  
@@ -12,7 +13,7 @@
         <h1>Suppliers</h1>
         
         <div id="Form01" class="w3-container w3-light-grey w3-padding-large w3-margin-bottom" appml-data="appml.php?model=model_suppliersform" appml-controller="myFormController" style="display:none;">
-          <div appml-include-html="inc_formcommands.htm"></div>
+          <div appml-include-html="inc_formcommands.html"></div>
           <p>
             <label>SupplierID:</label>
             <input id="SupplierID" class="w3-input w3-border">
@@ -48,8 +49,8 @@
         </div>
         
         <div appml-data="appml.php?model=model_supplierslist">
-          <div appml-include-html="inc_listcommands.htm"></div>
-          <div appml-include-html="inc_filter.htm"></div>
+          <div appml-include-html="inc_listcommands.html"></div>
+          <div appml-include-html="inc_filter.html"></div>
           <div class="w3-responsive">
             <table class="w3-table-all">
               <tr>

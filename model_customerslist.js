@@ -1,7 +1,7 @@
 
 {
-"rowsperpage" : 10,
 "security": "user",
+"rowsperpage" : 10,
 "database" : {
     "connection" : "inventory",
     "sql" : "SELECT * FROM Customers",
